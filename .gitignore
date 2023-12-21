@@ -4,3 +4,6 @@ todo_app.iml
 
 # MAC
 .DS_Store
+
+# Logging
+webapp.log
