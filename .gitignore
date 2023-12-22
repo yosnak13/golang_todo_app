@@ -7,3 +7,6 @@ todo_app.iml
 
 # Logging
 webapp.log
+
+# DB
+webapp.sql
