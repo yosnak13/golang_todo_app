@@ -47,9 +47,14 @@ func main() {
 	user, _ := models.GetUser(2)
 	user.CreateTodo("SecondTodo")
 
-	todos, _ := models.ListTodos()
+	todos, _ := user.ListTodosByUser()
 	for _, v := range todos {
 		fmt.Println(v)
 	}
+
+	//todos, _ := models.GetTodo()
+	//for _, v := range todos {
+	//	fmt.Println(v)
+	//}
 
 }
