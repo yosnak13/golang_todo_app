@@ -44,17 +44,29 @@ func main() {
 		fmt.Println(t)
 	*/
 
-	user, _ := models.GetUser(2)
-	user.CreateTodo("SecondTodo")
+	/*
+		user, _ := models.GetUser(2)
+		user.CreateTodo("SecondTodo")
 
-	todos, _ := user.ListTodosByUser()
-	for _, v := range todos {
-		fmt.Println(v)
-	}
+		todos, _ := user.ListTodosByUser()
+		for _, v := range todos {
+			fmt.Println(v)
+		}
+	*/
 
 	//todos, _ := models.GetTodo()
 	//for _, v := range todos {
 	//	fmt.Println(v)
 	//}
+
+	t, _ := models.GetTodo(1)
+	fmt.Println("-------------------")
+	fmt.Println(t)
+	t.Content = "Update Todo"
+	t.UpdateTodo()
+
+	updatedTodo, _ := models.GetTodo(1)
+	fmt.Println("-------------------")
+	fmt.Println(updatedTodo)
 
 }
