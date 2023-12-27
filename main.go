@@ -54,19 +54,29 @@ func main() {
 		}
 	*/
 
-	//todos, _ := models.GetTodo()
-	//for _, v := range todos {
-	//	fmt.Println(v)
-	//}
+	/*
+		todos, _ := models.GetTodo()
+		for _, v := range todos {
+			fmt.Println(v)
+		}
+	*/
 
-	t, _ := models.GetTodo(1)
-	fmt.Println("-------------------")
-	fmt.Println(t)
-	t.Content = "Update Todo"
-	t.UpdateTodo()
+	/*
+		t, _ := models.GetTodo(1)
+		fmt.Println("-------------------")
+		fmt.Println(t)
+		t.Content = "Update Todo"
+		t.UpdateTodo()
 
-	updatedTodo, _ := models.GetTodo(1)
-	fmt.Println("-------------------")
-	fmt.Println(updatedTodo)
+		updatedTodo, _ := models.GetTodo(1)
+		fmt.Println("-------------------")
+		fmt.Println(updatedTodo)
+	*/
 
+	/*
+		t, _ := models.GetTodo(3)
+		t.DeleteTodo()
+		deletedTodo, _ := models.GetTodo(3)
+		fmt.Println(deletedTodo)
+	*/
 }
