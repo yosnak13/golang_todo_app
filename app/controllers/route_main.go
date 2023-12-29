@@ -15,11 +15,18 @@ func top(w http.ResponseWriter, r *http.Request) {
 }
 
 func index(w http.ResponseWriter, r *http.Request) {
-	_, err := getCookie(w, r)
+	sess, err := getCookie(w, r)
 	if err != nil {
 		log.Println(err)
 		http.Redirect(w, r, "/top", 302)
 	} else {
-		generateHTML(w, nil, "layout", "private_navbar", "index")
+		user, err := sess.GetUserBySession()
+		if err != nil {
+			log.Println(err)
+		}
+		todos, _ := user.ListTodosByUser()
+		user.Todos = todos
+		// 第二引数はフロントに渡したいデータを渡す
+		generateHTML(w, user, "layout", "private_navbar", "index")
 	}
 }
