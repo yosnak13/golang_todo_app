@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"html/template"
 	"net/http"
+	"todo_app/app/models"
 	"todo_app/config"
 )
 
@@ -18,6 +19,17 @@ func generateHTML(w http.ResponseWriter, data interface{}, filenames ...string) 
 
 }
 
+func getCookie(w http.ResponseWriter, r *http.Request) (sess models.Session, err error) {
+	cookie, err := r.Cookie("_cookie")
+	if err == nil {
+		sess = models.Session{UUID: cookie.Value}
+		if ok, _ := sess.CheckSession(); !ok {
+			err = fmt.Errorf("invalid getCookie")
+		}
+	}
+	return sess, err
+}
+
 func StartMainServer() error {
 
 	// Static読み込み。"/static/"ディレクトリはないためStripPrefixで取り除く
@@ -29,6 +41,7 @@ func StartMainServer() error {
 	http.HandleFunc("/signup", signup)
 	http.HandleFunc("/login", login)
 	http.HandleFunc("/authenticate", authenticate)
+	http.HandleFunc("/todos", index)
 
 	// 第二引数はnilを入れてデフォルトのマルチプレクサを使う
 	// アクセスしたことがないURLへアクセスした場合、PageNotFoundを返す仕組み
