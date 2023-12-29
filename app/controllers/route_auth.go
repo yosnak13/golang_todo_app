@@ -9,7 +9,15 @@ import (
 func signup(w http.ResponseWriter, r *http.Request) {
 
 	if r.Method == "GET" {
-		generateHTML(w, nil, "layout", "public_navbar", "sign_up")
+
+		// ログイン判定
+		_, err := getCookie(w, r)
+		if err != nil {
+			generateHTML(w, nil, "layout", "public_navbar", "sign_up")
+		} else {
+			http.Redirect(w, r, "/todos", 302)
+		}
+
 	} else if r.Method == "POST" {
 		// 入力フォーム解析
 		err := r.ParseForm()
@@ -30,7 +38,24 @@ func signup(w http.ResponseWriter, r *http.Request) {
 }
 
 func login(w http.ResponseWriter, r *http.Request) {
-	generateHTML(w, nil, "layout", "public_navbar", "login")
+	_, err := getCookie(w, r)
+	if err != nil {
+		generateHTML(w, nil, "layout", "public_navbar", "login")
+	} else {
+		http.Redirect(w, r, "/todos", 302)
+	}
+}
+
+func logout(w http.ResponseWriter, r *http.Request) {
+	cookie, err := r.Cookie("_cookie")
+	if err != nil {
+		log.Println(err)
+	}
+	if err != http.ErrNoCookie {
+		session := models.Session{UUID: cookie.Value}
+		session.DeleteSessionByUUID()
+	}
+	http.Redirect(w, r, "/login", 302)
 }
 
 func authenticate(w http.ResponseWriter, r *http.Request) {
