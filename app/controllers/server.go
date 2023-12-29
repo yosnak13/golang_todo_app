@@ -41,6 +41,7 @@ func StartMainServer() error {
 	http.HandleFunc("/signup", signup)
 	http.HandleFunc("/login", login)
 	http.HandleFunc("/authenticate", authenticate)
+	http.HandleFunc("/logout", logout)
 	http.HandleFunc("/todos", index)
 
 	// 第二引数はnilを入れてデフォルトのマルチプレクサを使う
