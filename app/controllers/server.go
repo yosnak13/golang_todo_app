@@ -27,6 +27,8 @@ func StartMainServer() error {
 	// URL登録
 	http.HandleFunc("/", top)
 	http.HandleFunc("/signup", signup)
+	http.HandleFunc("/login", login)
+	http.HandleFunc("/authenticate", authenticate)
 
 	// 第二引数はnilを入れてデフォルトのマルチプレクサを使う
 	// アクセスしたことがないURLへアクセスした場合、PageNotFoundを返す仕組み
