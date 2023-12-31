@@ -43,6 +43,8 @@ func StartMainServer() error {
 	http.HandleFunc("/authenticate", authenticate)
 	http.HandleFunc("/logout", logout)
 	http.HandleFunc("/todos", index)
+	http.HandleFunc("/todos/new", todoNew)
+	http.HandleFunc("/todos/save", todoSave)
 
 	// 第二引数はnilを入れてデフォルトのマルチプレクサを使う
 	// アクセスしたことがないURLへアクセスした場合、PageNotFoundを返す仕組み
